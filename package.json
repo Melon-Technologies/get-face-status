@@ -1,5 +1,5 @@
 {
-  "name": "@rd-works/get-face-status",
+  "name": "@melon-technologies/get-face-status",
   "version": "1.0.0",
   "description": "A face detection module that finds the best face and status ",
   "keywords": [
@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Saffe-JP/get-face-status.git"
+    "url": "https://github.com/Melon-Technologies/get-face-status.git"
   },
   "scripts": {
     "build:all": "npm run build:library && npm run build:bundle && npm run build:min",

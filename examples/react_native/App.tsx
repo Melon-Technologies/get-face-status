@@ -3,7 +3,7 @@ import {Dimensions, StyleSheet, View} from 'react-native';
 import Svg, {Rect, Text} from 'react-native-svg';
 import {Camera, CameraType, FaceDetectionResult} from 'expo-camera';
 import * as FaceDetector from 'expo-face-detector';
-import * as saffe from '@rd-works/get-face-status';
+import * as saffe from '@melon-technologies/get-face-status';
 
 export default function App() {
   const [status, setStatus] = useState<saffe.Status>(saffe.FaceStatus.NO_FACE);
