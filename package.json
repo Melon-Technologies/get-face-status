@@ -1,6 +1,6 @@
 {
   "name": "@melon-technologies/get-face-status",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A face detection module that finds the best face and status ",
   "keywords": [
     "face-detection"
