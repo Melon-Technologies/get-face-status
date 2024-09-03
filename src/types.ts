@@ -28,7 +28,6 @@ export type Status = {
 export type Config = {
   detectorType: string;
   selfieMode: boolean;
-  bestFaceCriteria: (face: Face[], shape: Shape) => Face;
   checkFaceLeftMargin: number;
   checkFaceRightMargin: number;
   checkFaceBottomMargin: number;

@@ -4,7 +4,7 @@ export function euclidean2D(pt1: Point, pt2: Point) {
   return Math.sqrt(Math.pow(pt2.x - pt1.x, 2) + Math.pow(pt2.y - pt1.y, 2));
 }
 
-export function libsaffeLoss(faceBox: Box, shape: Shape) {
+export function bestFaceLoss(faceBox: Box, shape: Shape) {
   const width = faceBox.xMax - faceBox.xMin;
   const height = faceBox.yMax - faceBox.yMin;
   const area = width * height;
@@ -18,10 +18,10 @@ export function libsaffeLoss(faceBox: Box, shape: Shape) {
   return area - 2 * dist * dist;
 }
 
-export function libsaffeCriteria(faces: Face[], shape: Shape) {
+export function getBestFace(faces: Face[], shape: Shape) {
   return faces.reduce((face1, face2) => {
-    const loss1 = libsaffeLoss(face1.box, shape);
-    const loss2 = libsaffeLoss(face2.box, shape);
+    const loss1 = bestFaceLoss(face1.box, shape);
+    const loss2 = bestFaceLoss(face2.box, shape);
     return loss1 > loss2 ? face1 : face2;
   });
 }

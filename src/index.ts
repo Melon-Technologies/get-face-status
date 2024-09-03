@@ -1,3 +1,4 @@
+import { getBestFace } from "./best_face";
 import { checkFace } from "./check_face";
 import { defaultConfig } from "./default_config";
 import { getFaceNormalizer } from "./face_normalizer";
@@ -18,7 +19,7 @@ export function getFaceStatus(faces: any, shape: Shape, options = {}) {
   if (facesNormalized.length === 0) {
     status = FaceStatus.NO_FACE;
   } else {
-    face = config.bestFaceCriteria(facesNormalized, shape);
+    face = getBestFace(facesNormalized, shape);
     status = checkFace(face, shape, config);
   }
 
@@ -26,7 +27,7 @@ export function getFaceStatus(faces: any, shape: Shape, options = {}) {
 }
 
 if (typeof window !== "undefined") {
-  (window as any).saffe = {
+  (window as any).mt = {
     getFaceStatus: getFaceStatus,
   };
 }
