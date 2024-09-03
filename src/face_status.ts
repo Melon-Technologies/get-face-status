@@ -1,10 +1,10 @@
-export const FaceStatus = {
-  OK: { code: 1, text: "OK" },
-  NO_FACE: { code: -301, text: "NO_FACE" },
-  MOVE_LEFT: { code: -302, text: "MOVE_LEFT" },
-  MOVE_RIGHT: { code: -303, text: "MOVE_RIGHT" },
-  MOVE_DOWN: { code: -304, text: "MOVE_DOWN" },
-  MOVE_UP: { code: -305, text: "MOVE_UP" },
-  MOVE_IN: { code: -306, text: "MOVE_IN" },
-  MOVE_OUT: { code: -307, text: "MOVE_OUT" },
-};
+export enum FaceStatus {
+  OK = 1,
+  NO_FACE = -301,
+  MOVE_LEFT = -302,
+  MOVE_RIGHT = -303,
+  MOVE_DOWN = -304,
+  MOVE_UP = -305,
+  MOVE_IN = -306,
+  MOVE_OUT = -307,
+}

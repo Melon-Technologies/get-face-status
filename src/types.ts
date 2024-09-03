@@ -20,11 +20,6 @@ export type Shape = {
   height: number;
 };
 
-export type Status = {
-  code: number;
-  text: string;
-};
-
 export type Config = {
   detectorType: string;
   selfieMode: boolean;

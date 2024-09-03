@@ -3,17 +3,17 @@ import { checkFace } from "./check_face";
 import { defaultConfig } from "./default_config";
 import { getFaceNormalizer } from "./face_normalizer";
 import { FaceStatus } from "./face_status";
-import { Face, Shape, Status } from "./types";
+import { Face, Shape } from "./types";
 
 export { FaceStatus };
-export type { Face, Status };
+export type { Face };
 
 export function getFaceStatus(faces: any, shape: Shape, options = {}) {
   const config = { ...defaultConfig, ...options };
 
   const facesNormalized: Face[] = getFaceNormalizer(config)(faces);
 
-  let status: Status;
+  let status: FaceStatus;
   let face: Face | null = null;
 
   if (facesNormalized.length === 0) {
@@ -29,5 +29,6 @@ export function getFaceStatus(faces: any, shape: Shape, options = {}) {
 if (typeof window !== "undefined") {
   (window as any).mt = {
     getFaceStatus: getFaceStatus,
+    FaceStatus: FaceStatus,
   };
 }
