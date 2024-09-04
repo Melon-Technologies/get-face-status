@@ -23,10 +23,7 @@ export type Shape = {
 export type Config = {
   detectorType: string;
   selfieMode: boolean;
-  checkFaceLeftMargin: number;
-  checkFaceRightMargin: number;
-  checkFaceBottomMargin: number;
-  checkFaceTopMargin: number;
+  checkFaceMargin: number;
   checkFaceMinSize: number;
   checkFaceMaxSize: number;
   checkMultiFaceAreaRatio: number;

@@ -4,13 +4,13 @@ import { Box, Config, Shape } from "./types";
 export function checkMargin(box: Box, shape: Shape, config: Config) {
   let status = FaceStatus.OK;
 
-  if (box.xMin / shape.width < config.checkFaceLeftMargin) {
+  if (box.xMin / shape.width < config.checkFaceMargin) {
     status = config.selfieMode ? FaceStatus.MOVE_RIGHT : FaceStatus.MOVE_LEFT;
-  } else if (box.xMax / shape.width > 1 - config.checkFaceRightMargin) {
+  } else if (box.xMax / shape.width > 1 - config.checkFaceMargin) {
     status = config.selfieMode ? FaceStatus.MOVE_LEFT : FaceStatus.MOVE_RIGHT;
-  } else if (box.yMin / shape.height < config.checkFaceBottomMargin) {
+  } else if (box.yMin / shape.height < config.checkFaceMargin) {
     status = FaceStatus.MOVE_DOWN;
-  } else if (box.yMax / shape.height > 1 - config.checkFaceTopMargin) {
+  } else if (box.yMax / shape.height > 1 - config.checkFaceMargin) {
     status = FaceStatus.MOVE_UP;
   }
 
