@@ -7,4 +7,5 @@ export enum FaceStatus {
   MOVE_UP = -305,
   MOVE_IN = -306,
   MOVE_OUT = -307,
+  MULTIPLE_FACES = -309,
 }

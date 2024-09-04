@@ -8,9 +8,9 @@ import { getFaceStatus } from "../src/index";
 
 describe("index", () => {
   const shape = { width: 100, height: 100 };
-  const face1 = { box: { xMin: 50, xMax: 100, yMin: 50, yMax: 100 } };
+  const face1 = { box: { xMin: 60, xMax: 100, yMin: 60, yMax: 100 } };
   const face2 = { box: { xMin: 25, xMax: 75, yMin: 25, yMax: 75 } };
-  const face3 = { box: { xMin: 0, xMax: 50, yMin: 0, yMax: 50 } };
+  const face3 = { box: { xMin: 0, xMax: 40, yMin: 0, yMax: 40 } };
 
   test("FaceStatus.OK", () => {
     const { status, face } = getFaceStatus([face1, face2, face3], shape);

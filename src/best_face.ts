@@ -18,10 +18,10 @@ export function bestFaceLoss(faceBox: Box, shape: Shape) {
   return area - 2 * dist * dist;
 }
 
-export function getBestFace(faces: Face[], shape: Shape) {
-  return faces.reduce((face1, face2) => {
+export function sortFaces(faces: Face[], shape: Shape): Face[] {
+  return faces.sort((face1, face2) => {
     const loss1 = bestFaceLoss(face1.box, shape);
     const loss2 = bestFaceLoss(face2.box, shape);
-    return loss1 > loss2 ? face1 : face2;
+    return loss2 - loss1;
   });
 }

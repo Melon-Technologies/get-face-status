@@ -29,4 +29,5 @@ export type Config = {
   checkFaceTopMargin: number;
   checkFaceMinSize: number;
   checkFaceMaxSize: number;
+  checkMultiFaceAreaRatio: number;
 };

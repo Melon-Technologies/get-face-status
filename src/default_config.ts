@@ -9,4 +9,5 @@ export const defaultConfig: Config = {
   checkFaceTopMargin: 0.1,
   checkFaceMinSize: 0.1,
   checkFaceMaxSize: 0.6,
+  checkMultiFaceAreaRatio: 0.95,
 };

@@ -40,11 +40,11 @@ import "../../dist/get_face_status.js";
 
       const shape = { width: video.videoWidth, height: video.videoHeight };
       const options = { detectorType: "mediapipe" };
-      const { status, face } = saffe.getFaceStatus(faces, shape, options);
+      const { status, face } = mt.getFaceStatus(faces, shape, options);
 
-      text.innerHTML = status.text;
+      text.innerHTML = mt.FaceStatus[status];
 
-      if (status.code == 1 && face != null) {
+      if (status == mt.FaceStatus.OK && face != null) {
         ctx.beginPath();
         ctx.lineWidth = 4;
         ctx.strokeStyle = "blue";
