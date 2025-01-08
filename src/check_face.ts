@@ -31,6 +31,9 @@ export function checkSize(box: Box, shape: Shape, config: Config) {
   return status;
 }
 
+/**
+ * Checks the size ratio between two faces
+ */
 export function checkMultiFace(faceBox1: Box, faceBox2: Box, config: Config) {
   let status = FaceStatus.OK;
 
