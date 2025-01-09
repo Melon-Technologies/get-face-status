@@ -33,32 +33,36 @@ import "../../dist/get_face_status.js";
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     setInterval(async () => {
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      try {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      const estimationConfig = { flipHorizontal: false };
-      const faces = await detector.estimateFaces(video, estimationConfig);
+        const estimationConfig = { flipHorizontal: false };
+        const faces = await detector.estimateFaces(video, estimationConfig);
 
-      const shape = { width: video.videoWidth, height: video.videoHeight };
-      const options = { detectorType: "mediapipe" };
-      const { status, face } = mt.getFaceStatus(faces, shape, options);
+        const shape = { width: video.videoWidth, height: video.videoHeight };
+        const options = { detectorType: "mediapipe" };
+        const { status, face } = mt.getFaceStatus(faces, shape, options);
 
-      text.innerHTML = mt.FaceStatus[status];
+        text.innerHTML = mt.FaceStatus[status];
 
-      if (status == mt.FaceStatus.OK && face != null) {
-        ctx.beginPath();
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = "blue";
-        ctx.rect(
-          face.box.xMin,
-          face.box.yMin,
-          face.box.xMax - face.box.xMin,
-          face.box.yMax - face.box.yMin
-        );
-        ctx.stroke();
-        ctx.fillStyle = "red";
-        face.landmarks.forEach((pt) => {
-          ctx.fillRect(pt.x, pt.y, 5, 5);
-        });
+        if (status == mt.FaceStatus.OK && face != null) {
+          ctx.beginPath();
+          ctx.lineWidth = 4;
+          ctx.strokeStyle = "blue";
+          ctx.rect(
+            face.box.xMin,
+            face.box.yMin,
+            face.box.xMax - face.box.xMin,
+            face.box.yMax - face.box.yMin
+          );
+          ctx.stroke();
+          ctx.fillStyle = "red";
+          face.landmarks.forEach((pt) => {
+            ctx.fillRect(pt.x, pt.y, 5, 5);
+          });
+        }
+      } catch (error) {
+        console.error(error);
       }
     }, 1 / fps);
   });

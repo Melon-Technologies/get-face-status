@@ -23,4 +23,20 @@ describe("index", () => {
     expect(status).toBe(FaceStatus.NO_FACE);
     expect(face).toEqual(null);
   });
+
+  test("Invalid faces/shape inputs", () => {
+    const invalid_inputs = ["string", 42, true, null, undefined, () => {}];
+    invalid_inputs.forEach((x) => {
+      expect(() => getFaceStatus(x, shape)).toThrow();
+      expect(() => getFaceStatus([face1, face2, x], shape)).toThrow();
+      expect(() => getFaceStatus([face1, face2], x as any)).toThrow();
+    });
+  });
+
+  test("Invalid options inputs", () => {
+    const invalid_inputs = ["string", 42, true, null, () => {}];
+    invalid_inputs.forEach((x) => {
+      expect(() => getFaceStatus([face1], shape, x as any)).toThrow();
+    });
+  });
 });

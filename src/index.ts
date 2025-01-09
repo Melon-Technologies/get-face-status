@@ -9,6 +9,22 @@ export { FaceStatus };
 export type { Face };
 
 export function getFaceStatus(faces: any, shape: Shape, options = {}) {
+  if (typeof faces !== "object" || faces === null) {
+    throw new Error("`faces` must be a non-null object.");
+  }
+
+  if (faces.some((face: any) => typeof face !== "object" || face === null)) {
+    throw new Error("Each value in `faces` must be a non-null object.");
+  }
+
+  if (typeof shape !== "object" || shape === null) {
+    throw new Error("`shape` must be a non-null object.");
+  }
+
+  if (typeof options !== "object" || options === null) {
+    throw new Error("`options` must be a non-null object.");
+  }
+
   const config = { ...defaultConfig, ...options };
   const facesNormalized: Face[] = getFaceNormalizer(config)(faces);
 
