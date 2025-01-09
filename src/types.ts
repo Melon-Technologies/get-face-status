@@ -20,19 +20,11 @@ export type Shape = {
   height: number;
 };
 
-export type Status = {
-  code: number;
-  text: string;
-};
-
 export type Config = {
   detectorType: string;
   selfieMode: boolean;
-  bestFaceCriteria: (face: Face[], shape: Shape) => Face;
-  checkFaceLeftMargin: number;
-  checkFaceRightMargin: number;
-  checkFaceBottomMargin: number;
-  checkFaceTopMargin: number;
+  checkFaceMargin: number;
   checkFaceMinSize: number;
   checkFaceMaxSize: number;
+  checkMultiFaceAreaRatio: number;
 };

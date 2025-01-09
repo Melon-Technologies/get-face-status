@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { checkMargin, checkSize, checkFace } from "../src/check_face";
+import { checkMargin, checkMultiFace, checkSize } from "../src/check_face";
 import { defaultConfig } from "../src/default_config";
 import { FaceStatus } from "../src/face_status";
 
@@ -80,21 +80,21 @@ describe("checkSize", () => {
   });
 });
 
-describe("checkFace", () => {
-  const shape = { width: 100, height: 100 };
-  const options = {
-    checkFaceLeftMargin: 0.1,
-    checkFaceRightMargin: 0.1,
-    checkFaceTopMargin: 0.1,
-    checkFaceBottomMargin: 0.1,
-    checkFaceMinSize: 0.3,
-    checkFaceMaxSize: 0.7,
-  };
+describe("checkMultiFace", () => {
+  const options = { checkMultiFaceAreaRatio: 0.4};
   const config = { ...defaultConfig, ...options };
 
   test("FaceStatus.OK", () => {
-    const face = { box: { xMin: 30, xMax: 70, yMin: 30, yMax: 70 } };
-    const result = checkFace(face, shape, config);
+    const box1 = { xMin: 20, xMax: 80, yMin: 20, yMax: 80 };
+    const box2 = { xMin: 40, xMax: 60, yMin: 40, yMax: 60 };
+    const result = checkMultiFace(box1, box2, config);
     expect(result).toBe(FaceStatus.OK);
+  });
+
+  test("FaceStatus.MULTIPLE_FACES", () => {
+    const box1 = { xMin: 20, xMax: 80, yMin: 20, yMax: 80 };
+    const box2 = { xMin: 30, xMax: 70, yMin: 30, yMax: 70 };
+    const result = checkMultiFace(box1, box2, config);
+    expect(result).toBe(FaceStatus.MULTIPLE_FACES);
   });
 });
