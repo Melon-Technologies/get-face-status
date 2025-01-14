@@ -2,7 +2,7 @@ import "https://cdn.jsdelivr.net/npm/@mediapipe/face_detection";
 import "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core";
 import "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl";
 import "https://cdn.jsdelivr.net/npm/@tensorflow-models/face-detection";
-import "../../dist/get_face_status.js";
+import "../../../dist/get_face_status.js";
 
 (async () => {
   const fps = 25;
@@ -20,6 +20,23 @@ import "../../dist/get_face_status.js";
   };
 
   const detector = await faceDetection.createDetector(model, detectorConfig);
+
+  function drawFace(face) {
+    ctx.beginPath();
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = "blue";
+    ctx.rect(
+      face.box.xMin,
+      face.box.yMin,
+      face.box.xMax - face.box.xMin,
+      face.box.yMax - face.box.yMin
+    );
+    ctx.stroke();
+    ctx.fillStyle = "red";
+    face.landmarks.forEach((pt) => {
+      ctx.fillRect(pt.x, pt.y, 5, 5);
+    });
+  }
 
   try {
     const constraints = { video: true };
@@ -45,22 +62,11 @@ import "../../dist/get_face_status.js";
 
         text.innerHTML = mt.FaceStatus[status];
 
-        if (status == mt.FaceStatus.OK && face != null) {
-          ctx.beginPath();
-          ctx.lineWidth = 4;
-          ctx.strokeStyle = "blue";
-          ctx.rect(
-            face.box.xMin,
-            face.box.yMin,
-            face.box.xMax - face.box.xMin,
-            face.box.yMax - face.box.yMin
-          );
-          ctx.stroke();
-          ctx.fillStyle = "red";
-          face.landmarks.forEach((pt) => {
-            ctx.fillRect(pt.x, pt.y, 5, 5);
-          });
+        if (status != mt.FaceStatus.OK || face == null) {
+          return;
         }
+
+        drawFace(face);
       } catch (error) {
         console.error(error);
       }
