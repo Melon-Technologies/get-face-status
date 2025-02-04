@@ -7,7 +7,7 @@ import "../../../dist/get_face_status.js";
 (async () => {
   const fps = 25;
   const distThreshold = 5;
-  const nStableFrames = 100;
+  const stableTimeMs = 1000;
   const video = document.getElementById("video");
   const canvas = document.getElementById("canvas");
   const text = document.getElementById("text");
@@ -62,6 +62,7 @@ import "../../../dist/get_face_status.js";
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     let centroid = { x: 0, y: 0, count: 0 };
+    let start = Date.now();
     setInterval(async () => {
       try {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -76,6 +77,7 @@ import "../../../dist/get_face_status.js";
         text.innerHTML = mt.FaceStatus[status];
 
         if (status != mt.FaceStatus.OK || face == null) {
+          start = Date.now();
           centroid = { x: 0, y: 0, count: 0 };
           return;
         }
@@ -85,14 +87,17 @@ import "../../../dist/get_face_status.js";
         centroid.y += (pt.y - centroid.y) / (centroid.count + 1);
 
         if (getDist(pt, centroid) > distThreshold) {
+          start = Date.now();
           centroid = { x: 0, y: 0, count: 0 };
           return;
         }
 
         centroid.count++;
-        text.innerHTML = text.innerHTML + " (" + centroid.count + ")";
+        let elapsed = Date.now() - start;
+        text.innerHTML = `HOLD (Time: ${elapsed} ms)`;
 
-        if (centroid.count > nStableFrames) {
+        if (elapsed > stableTimeMs) {
+          text.innerHTML = mt.FaceStatus[status];
           drawFace(face);
         }
       } catch (error) {
